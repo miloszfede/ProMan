@@ -35,6 +35,11 @@ async function apiGet(url) {
 }
 
 async function apiPost(url, payload) {
+    let response = await fetch(url, {
+        method: "POST",
+    });
+    if (response.ok) {
+        return await response.json();
 }
 
 async function apiDelete(url) {
@@ -44,4 +49,4 @@ async function apiPut(url) {
 }
 
 async function apiPatch(url) {
-}
+}}
