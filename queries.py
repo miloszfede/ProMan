@@ -1,5 +1,6 @@
 import data_manager
-
+from psycopg.sql import SQL
+import bcrypt
 
 def get_card_status(status_id):
     """
@@ -47,3 +48,32 @@ def get_cards_for_board(board_id):
         , {"board_id": board_id})
 
     return matching_cards
+
+
+def get_board_title():
+    return [{"title"}]
+    return data_manager.execute_select(
+        """
+        SELECT title FROM boards
+        ;
+        """
+    )
+
+def add_user(cursor, login, password):
+    hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+    cursor.execute(
+        SQL("INSERT INTO users (login, password) VALUES (%(login)s, %(password)s) RETURNING id"),
+        {'login': login, 'password': hashed_password.decode('utf-8')}
+    )
+    return cursor.fetchone()['id']
+
+
+def get_user(cursor, login, password):
+    cursor.execute(
+        SQL("SELECT * FROM users WHERE login = %(login)s"),
+        {'login': login}
+    )
+    user = cursor.fetchone()
+    if user and bcrypt.checkpw(password.encode('utf-8'), user['password'].encode('utf-8')):
+        return user
+    return None

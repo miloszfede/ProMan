@@ -1,6 +1,6 @@
 import {dataHandler} from "../data/dataHandler.js";
-import {htmlFactory, htmlTemplates} from "../view/htmlFactory.js";
-import {domManager} from "../view/domManager.js";
+import {boardBuilder,htmlFactory, htmlTemplates} from "../view/htmlFactory.js";
+import {changeBoardName, domManager} from "../view/domManager.js";
 import {cardsManager} from "./cardsManager.js";
 
 export let boardsManager = {
@@ -17,9 +17,15 @@ export let boardsManager = {
             );
         }
     },
+
 };
 
 function showHideButtonHandler(clickEvent) {
     const boardId = clickEvent.target.dataset.boardId;
     cardsManager.loadCards(boardId);
 }
+
+
+changeBoardName(); {
+
+    }

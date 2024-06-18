@@ -1,3 +1,5 @@
+// import {changeBoardsNameWindow} from "./htmlFactory";
+
 export let domManager = {
     addChild(parentIdentifier, childContent) {
         const parent = document.querySelector(parentIdentifier);
@@ -16,3 +18,17 @@ export let domManager = {
         }
     },
 };
+
+export function changeBoardName() {
+
+    let boardTitles = document.querySelectorAll('.board-title');
+
+    boardTitles.forEach(boardTitle => {
+
+        boardTitle.addEventListener('click', alert('test'));
+
+    });
+
+
+
+}
